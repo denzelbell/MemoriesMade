@@ -9,8 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MemoriesMade">
-        <activity android:name=".AddLocation"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".AddLocation"
+            android:screenOrientation="portrait"
+            android:label="ADD A MEMORY"
+            android:theme="@style/CustomNoActionBarTheme"
+            ></activity>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            android:label="MAIN"
+            android:theme="@style/CustomNoActionBarTheme"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
