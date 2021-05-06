@@ -13,4 +13,16 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <!-- Use custom action bar color pallet -->
+    <style name="CustomNoActionBarTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/navy_blue</item>
+    </style>
+
+    <!-- Use custom toolbar color pallet -->
+    <style name="CustomToolbarStyle">
+        <item name="android:textColorPrimary">#FFFFFF</item>
+        <item name="android:colorControlNormal">#FFFFFF</item>
+    </style>
+
 </resources>
