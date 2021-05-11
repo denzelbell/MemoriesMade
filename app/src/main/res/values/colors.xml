@@ -7,6 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="text">#212121</color>
+    <color name="second_color">#9AA2AF</color>
 
     <!-- "So Many Lost Songs" - Color Pallet -->
     <color name="navy_blue">#051e3e</color>
@@ -15,4 +17,6 @@
     <color name="dark_pink">#651e3e</color>
     <color name="mid_pink">#851e3e</color>
     <color name="orange">#FF5722</color>
+    <color name="button_background_color">#63ace5</color>
+    <color name="green_field">#3EB127</color>
 </resources>
