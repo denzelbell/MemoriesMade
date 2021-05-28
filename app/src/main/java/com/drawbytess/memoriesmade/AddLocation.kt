@@ -6,7 +6,6 @@ import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -36,9 +35,9 @@ class AddLocation : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_add_location)
 
         // Set up toolbar
-        setSupportActionBar(toolb_add_place)
+        setSupportActionBar(toolbar_add_place)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        toolb_add_place.setNavigationOnClickListener {
+        toolbar_add_place.setNavigationOnClickListener {
             onBackPressed()
         }
 
