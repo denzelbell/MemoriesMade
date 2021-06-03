@@ -14,13 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MemoriesMade">
 
-        <activity android:name=".AddLocation"
+        <activity android:name=".activities.AddLocation"
             android:screenOrientation="portrait"
             android:label="ADD A MEMORY"
             android:theme="@style/CustomNoActionBarTheme"
             ></activity>
 
-        <activity android:name=".MainActivity"
+        <activity android:name=".activities.MainActivity"
             android:screenOrientation="portrait"
             android:label="Memories Made"
             android:theme="@style/CustomNoActionBarTheme"
