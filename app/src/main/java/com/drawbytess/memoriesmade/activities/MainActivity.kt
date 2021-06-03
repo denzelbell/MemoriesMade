@@ -1,8 +1,9 @@
-package com.drawbytess.memoriesmade
+package com.drawbytess.memoriesmade.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.drawbytess.memoriesmade.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
