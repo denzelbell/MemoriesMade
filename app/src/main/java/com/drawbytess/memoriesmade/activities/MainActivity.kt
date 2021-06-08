@@ -15,10 +15,9 @@ class MainActivity : AppCompatActivity() {
 
         fabAddLoc.setOnClickListener {
             val intent = Intent(
-                    this,
+                    this@MainActivity,
                     AddLocation::class.java)
             startActivity(intent)
         }
-
     }
 }
