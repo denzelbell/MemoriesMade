@@ -109,6 +109,7 @@ class AddLocation : AppCompatActivity(), View.OnClickListener {
                 pictureDialog.show()
             }
             R.id.btn_save -> {
+
                 when {
                     et_title.text.isNullOrEmpty() -> {
                         Toast.makeText(this,
@@ -132,27 +133,28 @@ class AddLocation : AppCompatActivity(), View.OnClickListener {
                         Toast.makeText(this,
                         "Please select an image",
                         Toast.LENGTH_SHORT).show()
-                    } else -> {
-                        val memoriesModel = MemoriesModel(
+                       } else -> {
+                        val memModel = MemoriesModel(
                             0,
                             et_title.text.toString(),
                             saveImageToInternalStorage.toString(),
                             et_description.text.toString(),
                             et_date.text.toString(),
                             et_location.text.toString(),
-                            mLatitude,
-                            mLongitude
+                            mLongitude,
+                            mLatitude
                         )
-                    val dbhandler = DatabaseHandler(this)
-                    val addPlace = dbhandler.addPlace(memoriesModel)
+                        val dbHandler = DatabaseHandler(this)
+                        val addPlaceResult = dbHandler.addMemPlace(memModel)
 
-                    if(addPlace > 0){
-                        Toast.makeText(
-                            this,
-                            "The happy place details are inserted successfully.",
-                            Toast.LENGTH_SHORT).show()
-                        finish()
-                    }
+                        if (addPlaceResult > 0) {
+                            Toast.makeText(
+                                this,
+                                "The happy place details are inserted successfully.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            finish()
+                        }
                     }
                 }
             }
