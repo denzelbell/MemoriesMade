@@ -19,4 +19,8 @@
     <color name="orange">#FF5722</color>
     <color name="button_background_color">#63ace5</color>
     <color name="green_field">#3EB127</color>
+
+    <color name="circular_image_border_color">#757575</color>
+    <color name="item_memories_description_text_color">#606060</color>
+
 </resources>
