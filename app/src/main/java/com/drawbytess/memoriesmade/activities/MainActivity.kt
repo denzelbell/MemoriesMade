@@ -1,11 +1,11 @@
 package com.drawbytess.memoriesmade.activities
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.appcompat.view.menu.MenuAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.drawbytess.memoriesmade.R
 import com.drawbytess.memoriesmade.adapters.MemoriesMadeAdapter
@@ -18,13 +18,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setSupportActionBar(toolb_main)
+        setSupportActionBar(toolbar_main)
 
         fabAddLoc.setOnClickListener {
             val intent = Intent(
                     this@MainActivity,
                     AddLocation::class.java)
-            startActivity(intent)
+            startActivityForResult(intent, ADD_PLACE_REQUEST_CODE)
         }
 
         getMemoryListFromLocalDB()
@@ -52,6 +52,20 @@ class MainActivity : AppCompatActivity() {
                 rv_memories_list.visibility = View.GONE
                 tv_no_records_available.visibility = View.VISIBLE
         }
+    }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == ADD_PLACE_REQUEST_CODE){
+            if (resultCode == Activity.RESULT_OK){
+                getMemoryListFromLocalDB()
+            } else {
+                Log.e("Activity", "Cancelled or Back Pressed")
+            }
+        }
+    }
+    companion object {
+        var ADD_PLACE_REQUEST_CODE = 1
     }
 }
