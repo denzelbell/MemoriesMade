@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.drawbytess.memoriesmade">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="false"
@@ -15,24 +15,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MemoriesMade"
         tools:ignore="AllowBackup">
-
-        <activity android:name=".activities.MainActivity"
+        <activity
+            android:name=".activities.MemoriesDetailActivity"
+            android:label="Memory Details"
             android:screenOrientation="portrait"
+            android:theme="@style/CustomNoActionBarTheme" />
+        <activity
+            android:name=".activities.MainActivity"
             android:label="Memories Made"
-            android:theme="@style/CustomNoActionBarTheme"
-            >
+            android:screenOrientation="portrait"
+            android:theme="@style/CustomNoActionBarTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+
             </intent-filter>
         </activity>
-
-        <activity android:name=".activities.AddLocation"
-            android:screenOrientation="portrait"
+        <activity
+            android:name=".activities.AddLocation"
             android:label="ADD A MEMORY"
+            android:screenOrientation="portrait"
             android:theme="@style/CustomNoActionBarTheme" />
-
     </application>
 
 </manifest>
