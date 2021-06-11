@@ -1,8 +1,11 @@
 package com.drawbytess.memoriesmade.database
 
+import android.content.ContentUris
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
 import com.drawbytess.memoriesmade.models.MemoriesModel
 
@@ -60,5 +63,37 @@ class DatabaseHandler(context: Context) :
 
         db.close()
         return result
+    }
+    fun getMemoriesList(): ArrayList<MemoriesModel>{
+        val memoriesList = ArrayList<MemoriesModel>()
+        val selectQuery = "SELECT * FROM $TABLE_NAME_MEMORY"
+        val db = this.readableDatabase
+
+        try {
+            val cursor: Cursor = db.rawQuery(selectQuery, null)
+
+            if (cursor.moveToFirst()){
+                do {
+                    val place = MemoriesModel(
+                        cursor.getInt(cursor.getColumnIndex(KEY_ID)),
+                        cursor.getString(cursor.getColumnIndex(KEY_TITLE)),
+                        cursor.getString(cursor.getColumnIndex(KEY_IMAGE)),
+                        cursor.getString(cursor.getColumnIndex(KEY_DESCRIPTION)),
+                        cursor.getString(cursor.getColumnIndex(KEY_DATE)),
+                        cursor.getString(cursor.getColumnIndex(KEY_LOCATION)),
+                        cursor.getDouble(cursor.getColumnIndex(KEY_LONGITUDE)),
+                        cursor.getDouble(cursor.getColumnIndex(KEY_LATITUDE))
+                    )
+                    memoriesList.add(place)
+
+                } while (cursor.moveToNext())
+            }
+            cursor.close()
+
+        } catch (e: SQLiteException){
+            db.execSQL(selectQuery)
+            return ArrayList()
+        }
+        return memoriesList
     }
 }
