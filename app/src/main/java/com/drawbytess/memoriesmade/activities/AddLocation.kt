@@ -148,11 +148,7 @@ class AddLocation : AppCompatActivity(), View.OnClickListener {
                         val addPlaceResult = dbHandler.addMemPlace(memModel)
 
                         if (addPlaceResult > 0) {
-                            Toast.makeText(
-                                this,
-                                "The happy place details are inserted successfully.",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            setResult(Activity.RESULT_OK)
                             finish()
                         }
                     }
