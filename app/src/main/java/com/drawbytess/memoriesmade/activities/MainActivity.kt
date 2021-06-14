@@ -24,48 +24,50 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(
                     this@MainActivity,
                     AddLocation::class.java)
+
             startActivityForResult(intent, ADD_PLACE_REQUEST_CODE)
         }
 
         getMemoryListFromLocalDB()
     }
 
-    // Adds items to recyclerView
-    private fun setupMemoryRecyclerView(memoryList: ArrayList<MemoriesModel>){
-
-        rv_memories_list.layoutManager = LinearLayoutManager(this)
-        rv_memories_list.setHasFixedSize(true)
-
-        val placesAdapter = MemoriesMadeAdapter(this, memoryList)
-        rv_memories_list.adapter = placesAdapter
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == ADD_PLACE_REQUEST_CODE){
+            if (resultCode == Activity.RESULT_OK){
+                getMemoryListFromLocalDB()
+            } else {
+                Log.e("Activity", "Cancelled or Back pressed")
+            }
+        }
     }
 
     private fun getMemoryListFromLocalDB(){
         val dbHandler = DatabaseHandler(this)
-        val getMemList: ArrayList<MemoriesModel> = dbHandler.getMemoriesList()
+        val getMemList = dbHandler.getMemoriesList()
 
         if (getMemList.size > 0){
             rv_memories_list.visibility = View.VISIBLE
             tv_no_records_available.visibility = View.GONE
             setupMemoryRecyclerView(getMemList)
             } else {
-                rv_memories_list.visibility = View.GONE
-                tv_no_records_available.visibility = View.VISIBLE
+            rv_memories_list.visibility = View.GONE
+            tv_no_records_available.visibility = View.VISIBLE
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+    // Adds items to recyclerView
+    private fun setupMemoryRecyclerView(
+        memoryList: ArrayList<MemoriesModel>){
 
-        if (resultCode == ADD_PLACE_REQUEST_CODE){
-            if (resultCode == Activity.RESULT_OK){
-                getMemoryListFromLocalDB()
-            } else {
-                Log.e("Activity", "Cancelled or Back Pressed")
-            }
-        }
+        rv_memories_list.layoutManager = LinearLayoutManager(this)
+        rv_memories_list.setHasFixedSize(true)
+
+        val placesAdapter = MemoriesMadeAdapter(this@MainActivity, memoryList)
+        rv_memories_list.adapter = placesAdapter
     }
+
     companion object {
-        var ADD_PLACE_REQUEST_CODE = 1
+        private const val ADD_PLACE_REQUEST_CODE = 1
     }
 }

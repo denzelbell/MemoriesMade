@@ -16,11 +16,6 @@
         android:theme="@style/Theme.MemoriesMade"
         tools:ignore="AllowBackup">
         <activity
-            android:name=".activities.MemoriesDetailActivity"
-            android:label="Memory Details"
-            android:screenOrientation="portrait"
-            android:theme="@style/CustomNoActionBarTheme" />
-        <activity
             android:name=".activities.MainActivity"
             android:label="Memories Made"
             android:screenOrientation="portrait"
@@ -35,6 +30,11 @@
         <activity
             android:name=".activities.AddLocation"
             android:label="ADD A MEMORY"
+            android:screenOrientation="portrait"
+            android:theme="@style/CustomNoActionBarTheme" />
+        <activity
+            android:name=".activities.MemoriesDetailActivity"
+            android:label="Memory Details"
             android:screenOrientation="portrait"
             android:theme="@style/CustomNoActionBarTheme" />
     </application>
