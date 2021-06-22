@@ -34,7 +34,7 @@ import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
-class AddLocation : AppCompatActivity(), View.OnClickListener {
+class AddLocationActivity : AppCompatActivity(), View.OnClickListener {
 
     private var cal = Calendar.getInstance()
     private lateinit var dateSetListener: DatePickerDialog.OnDateSetListener
@@ -82,7 +82,7 @@ class AddLocation : AppCompatActivity(), View.OnClickListener {
              */
             R.id.et_date -> {
                 DatePickerDialog(
-                        this@AddLocation,
+                        this@AddLocationActivity,
                         dateSetListener,
                         cal.get(Calendar.YEAR),
                         cal.get(Calendar.MONTH),
@@ -176,7 +176,7 @@ class AddLocation : AppCompatActivity(), View.OnClickListener {
                     } catch (e: IOException){
                         e.printStackTrace()
                         Toast.makeText(
-                            this@AddLocation,
+                            this@AddLocationActivity,
                             "Failed to load the image from Gallery!",
                             Toast.LENGTH_LONG
                         ).show()
