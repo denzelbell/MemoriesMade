@@ -1,11 +1,13 @@
 package com.drawbytess.memoriesmade.activities
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContract
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.drawbytess.memoriesmade.R
 import com.drawbytess.memoriesmade.adapters.MemoriesMadeAdapter
@@ -21,26 +23,31 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar_main)
 
         fabAddLoc.setOnClickListener {
-            val intent = Intent(
-                    this@MainActivity,
-                    AddLocation::class.java)
+            // TODO: (3: Need to find work around for automatic update for recyclerview.)
+            val intent = Intent(this@MainActivity,
+                    AddLocationActivity::class.java)
 
             startActivityForResult(intent, ADD_PLACE_REQUEST_CODE)
+
         }
 
         getMemoryListFromLocalDB()
     }
 
+    // TODO: (2: onActivityResult is no longer used. Find work around.)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == ADD_PLACE_REQUEST_CODE){
             if (resultCode == Activity.RESULT_OK){
                 getMemoryListFromLocalDB()
-            } else {
+            }else{
                 Log.e("Activity", "Cancelled or Back pressed")
             }
         }
     }
+
+
+   // TODO: (1: Fix automatic update that is suppose to occur once a memory is added.)
 
     private fun getMemoryListFromLocalDB(){
         val dbHandler = DatabaseHandler(this)
@@ -49,8 +56,9 @@ class MainActivity : AppCompatActivity() {
         if (getMemList.size > 0){
             rv_memories_list.visibility = View.VISIBLE
             tv_no_records_available.visibility = View.GONE
+
             setupMemoryRecyclerView(getMemList)
-            } else {
+        } else {
             rv_memories_list.visibility = View.GONE
             tv_no_records_available.visibility = View.VISIBLE
         }
@@ -63,7 +71,7 @@ class MainActivity : AppCompatActivity() {
         rv_memories_list.layoutManager = LinearLayoutManager(this)
         rv_memories_list.setHasFixedSize(true)
 
-        val placesAdapter = MemoriesMadeAdapter(this@MainActivity, memoryList)
+        val placesAdapter = MemoriesMadeAdapter(this, memoryList)
         rv_memories_list.adapter = placesAdapter
     }
 
