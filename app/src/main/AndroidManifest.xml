@@ -28,7 +28,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.AddLocation"
+            android:name=".activities.AddLocationActivity"
             android:label="ADD A MEMORY"
             android:screenOrientation="portrait"
             android:theme="@style/CustomNoActionBarTheme" />
