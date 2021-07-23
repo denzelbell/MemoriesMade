@@ -7,21 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_main"
-        android:background="@color/dark_purple"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:theme="@style/CustomToolbarStyle"
-        app:titleTextColor="@color/white"
-        />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_memories_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
-        tools:visibility="visible"
+        tools:visibility="gone"
         />
 
     <TextView
@@ -31,8 +22,8 @@
         android:gravity="center"
         android:text="@string/note_text_no_memories_found_yet"
         android:textSize="@dimen/no_records_available_text_size"
-        android:visibility="gone"
-        tools:visibility="gone"
+        android:visibility="visible"
+        tools:visibility="visible"
         />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
