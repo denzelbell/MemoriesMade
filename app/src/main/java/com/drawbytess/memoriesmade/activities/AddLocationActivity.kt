@@ -42,6 +42,8 @@ class AddLocationActivity : AppCompatActivity(), View.OnClickListener {
     private var mLatitude : Double = 0.0
     private var mLongitude : Double = 0.0
 
+    private var mMemoriesDetails : MemoriesModel? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +54,11 @@ class AddLocationActivity : AppCompatActivity(), View.OnClickListener {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar_add_place.setNavigationOnClickListener {
             onBackPressed()
+        }
+
+        if (intent.hasExtra(MainActivity.EXTRA_PLACE_DETAILS)){
+            mMemoriesDetails = intent.getParcelableExtra(
+                MainActivity.EXTRA_PLACE_DETAILS) as MemoriesModel
         }
 
         // Setup date dialog and update selected date in view.
@@ -65,12 +72,18 @@ class AddLocationActivity : AppCompatActivity(), View.OnClickListener {
             }
         updateDateInView() // Populations the current date by default
 
+        if (mMemoriesDetails != null) {
+            supportActionBar?.title = "Edit Memory"
+
+            et_title.setText(mMemoriesDetails!!.title)
+            et_description.setText(mMemoriesDetails!!.description)
+            et_date.setText(mMemoriesDetails!!.date)
+            et_location.setText(mMemoriesDetails!!.location)
+            mLatitude = mMemoriesDetails!!.latitude
+            mLongitude = mMemoriesDetails!!.longitude
+        }
         et_date.setOnClickListener(this)
-
-        // Setup add image button
         tv_add_image.setOnClickListener(this)
-
-        // Setup save button
         btn_save.setOnClickListener (this)
 
     }
