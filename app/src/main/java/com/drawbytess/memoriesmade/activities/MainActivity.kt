@@ -1,41 +1,38 @@
 package com.drawbytess.memoriesmade.activities
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.activity.result.contract.ActivityResultContract
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.drawbytess.memoriesmade.R
 import com.drawbytess.memoriesmade.adapters.MemoriesMadeAdapter
 import com.drawbytess.memoriesmade.database.DatabaseHandler
 import com.drawbytess.memoriesmade.models.MemoriesModel
 import kotlinx.android.synthetic.main.activity_main.*
+import pl.kitek.rvswipetododelete.SwipeToDeleteCallback
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setSupportActionBar(toolbar_main)
-
         fabAddLoc.setOnClickListener {
             // TODO: (3: Need to find work around for automatic update for recyclerview.)
-            val intent = Intent(this@MainActivity,
-                    AddLocationActivity::class.java)
+            val intent = Intent(this@MainActivity, AddLocationActivity::class.java)
 
             startActivityForResult(intent, ADD_PLACE_REQUEST_CODE)
-
         }
 
         getMemoryListFromLocalDB()
     }
 
     // TODO: (2: onActivityResult is no longer used. Find work around.)
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(
+        requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == ADD_PLACE_REQUEST_CODE){
             if (resultCode == Activity.RESULT_OK){
@@ -45,9 +42,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-
-   // TODO: (1: Fix automatic update that is suppose to occur once a memory is added.)
 
     private fun getMemoryListFromLocalDB(){
         val dbHandler = DatabaseHandler(this)
@@ -73,9 +67,28 @@ class MainActivity : AppCompatActivity() {
 
         val placesAdapter = MemoriesMadeAdapter(this, memoryList)
         rv_memories_list.adapter = placesAdapter
+
+        // Set up recyclerview click activity
+        placesAdapter.setOnClickListener(object : MemoriesMadeAdapter.OnClickListener {
+            override fun onClick(position: Int, model: MemoriesModel) {
+                val intent = Intent(this@MainActivity,
+                    MemoriesDetailActivity::class.java)
+                // Make model parcelable in memoriesModel to get rid of putExtra error.
+                intent.putExtra(EXTRA_PLACE_DETAILS, model)
+                startActivity(intent)
+            }
+        })
+
+        val editSwipHandler = object : SwipeToDeleteCallback(this){
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val adapter = rv_memories_list.adapter as MemoriesMadeAdapter
+                adapter.notifyEditItem(this@MainActivity, viewHolder.adapterPosition, ADD_PLACE_REQUEST_CODE)
+            }
+        }
     }
 
     companion object {
-        private const val ADD_PLACE_REQUEST_CODE = 1
+        var ADD_PLACE_REQUEST_CODE = 1
+        var EXTRA_PLACE_DETAILS = "extra place details"
     }
 }
