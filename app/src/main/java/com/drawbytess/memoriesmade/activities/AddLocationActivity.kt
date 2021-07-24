@@ -57,7 +57,7 @@ class AddLocationActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         if (intent.hasExtra(MainActivity.EXTRA_PLACE_DETAILS)){
-            mMemoriesDetails = intent.getParcelableExtra(
+            mMemoriesDetails = intent.getSerializableExtra(
                 MainActivity.EXTRA_PLACE_DETAILS) as MemoriesModel
         }
 

@@ -16,7 +16,7 @@ class MemoriesDetailActivity : AppCompatActivity() {
 
         if(intent.hasExtra(MainActivity.EXTRA_PLACE_DETAILS)) {
             memoryPlaceDetailModel =
-                intent.getParcelableExtra(MainActivity.EXTRA_PLACE_DETAILS) as MemoriesModel
+                intent.getSerializableExtra(MainActivity.EXTRA_PLACE_DETAILS) as MemoriesModel
         }
 
         if (memoryPlaceDetailModel != null) {
