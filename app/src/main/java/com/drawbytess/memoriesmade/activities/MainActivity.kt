@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.result.contract.ActivityResultContract
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.drawbytess.memoriesmade.R
@@ -21,26 +22,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         fabAddLoc.setOnClickListener {
-            // TODO: (3: Need to find work around for automatic update for recyclerview.)
-            val intent = Intent(this@MainActivity, AddLocationActivity::class.java)
 
-            startActivityForResult(intent, ADD_PLACE_REQUEST_CODE)
         }
 
         getMemoryListFromLocalDB()
-    }
-
-    // TODO: (2: onActivityResult is no longer used. Find work around.)
-    override fun onActivityResult(
-        requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == ADD_PLACE_REQUEST_CODE){
-            if (resultCode == Activity.RESULT_OK){
-                getMemoryListFromLocalDB()
-            }else{
-                Log.e("Activity", "Cancelled or Back pressed")
-            }
-        }
     }
 
     private fun getMemoryListFromLocalDB(){
